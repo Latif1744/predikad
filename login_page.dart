@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
             width: 300,
 
             child: Image.asset(
-              'assets/images/komp.png',
+              'assets/image/komp.png',
               fit: BoxFit.cover,
             ),
           ),
