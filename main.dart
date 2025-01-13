@@ -1,31 +1,47 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import halaman login
+import 'pages/login.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key}); // Tambahkan constructor dengan key
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SplashPage(), // Menampilkan SplashPage terlebih dahulu
+      home: const SplashPage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget { // Ubah ke StatefulWidget
+  const SplashPage({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    // Mengatur delay untuk berpindah ke halaman login
-    Future.delayed(Duration(seconds: 3), () {
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    _navigateToLogin(); // Pindahkan logika navigasi ke method terpisah
+  }
+
+  void _navigateToLogin() {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()), // Navigasi ke LoginPage
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
@@ -33,20 +49,24 @@ class SplashPage extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
-              color: Color(0xFFD9F99D), // Warna hijau muda
+              color: const Color(0xFFD9F99D),
             ),
           ),
           // Bagian tengah (Hijau)
           Expanded(
             flex: 3,
             child: Container(
-              color: Color(0xFF4CAF50), // Warna hijau standar
+              color: const Color(0xFF4CAF50),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Teks "PREDIKAD"
-                    Text(
+                    // Logo (jika ada)
+                    Image.asset(
+                      'assets/images/logo.png',
+                      height: 100,
+                    ),
+                    const Text(
                       'PREDIKAD',
                       style: TextStyle(
                         fontSize: 32,
@@ -54,9 +74,8 @@ class SplashPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 10),
-                    // Teks "Presensi dan Siakad"
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       'Presensi dan Siakad',
                       style: TextStyle(
                         fontSize: 20,
@@ -72,7 +91,7 @@ class SplashPage extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Container(
-              color: Color(0xFF2E7D32), // Warna hijau tua
+              color: const Color(0xFF2E7D32),
             ),
           ),
         ],
